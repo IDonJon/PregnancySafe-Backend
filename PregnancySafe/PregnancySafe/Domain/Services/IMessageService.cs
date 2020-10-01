@@ -10,8 +10,8 @@ namespace PregnancySafe.Domain.Services
     public interface IMessageService
     {
         Task<IEnumerable<Message>> ListAsync();
-        //Task<MessageResponse> SaveAsync(Message message);
-        //Task<MessageResponse> UpdateAsync(int id, Message message);
-        //Task<MessageResponse> DeleteAsync(int id);
+        Task<MessageResponse> SaveAsync(Message message);
+        Task<MessageResponse> UpdateAsync(int id, Message message);
+        Task<MessageResponse> DeleteAsync(int id);
     }
 }
