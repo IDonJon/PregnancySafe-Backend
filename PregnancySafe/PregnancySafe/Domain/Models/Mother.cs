@@ -13,9 +13,9 @@ namespace PregnancySafe.Domain.Models
         public string Email { get; set; }
         public int Age { get; set; }
         public int PregnancyStageId { get; set; }
-        //public PregnancyStage PregnancyStage { get; set; }
-        //public IList<Chat> Chats { get; set; } = new List<Chat>();
-        //public IList<MedicalAppointment> MedicalAppointments { get; set; } = new List<MedicalAppointment>();
-        //public IList<MedicalExam> MedicalExams { get; set; } = new List<MedicalExam>();
+        public PregnancyStage PregnancyStage { get; set; }
+        public IList<Chat> Chats { get; set; } = new List<Chat>();
+        public IList<MedicalAppointment> MedicalAppointments { get; set; } = new List<MedicalAppointment>();
+        public IList<MedicalExam> MedicalExams { get; set; } = new List<MedicalExam>();
     }
 }

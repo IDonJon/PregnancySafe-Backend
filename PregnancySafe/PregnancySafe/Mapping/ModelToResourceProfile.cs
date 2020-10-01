@@ -12,15 +12,15 @@ namespace PregnancySafe.Mapping
     {
         public ModelToResourceProfile()
         {
-            //CreateMap<Advice, AdviceResource>();
-            //CreateMap<Chat, ChatResource>();
-            //CreateMap<MedicalAppointment, MedicalAppointmentResource>();
-            //CreateMap<MedicalExam, MedicalExamResource>();
-            //CreateMap<Message, MessageResource>();
+            CreateMap<Advice, AdviceResource>();
+            CreateMap<Chat, ChatResource>();
+            CreateMap<MedicalAppointment, MedicalAppointmentResource>();
+            CreateMap<MedicalExam, MedicalExamResource>();
+            CreateMap<Message, MessageResource>();
             CreateMap<Mother, MotherResource>();
-            //CreateMap<Obstetrician, ObstetricianResource>();
-            //CreateMap<PregnancyStage, PregnancyStageResource>();
-            //CreateMap<Video, VideoResource>();
+            CreateMap<Obstetrician, ObstetricianResource>();
+            CreateMap<PregnancyStage, PregnancyStageResource>();
+            CreateMap<Video, VideoResource>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿//using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PregnancySafe.Domain.Models;
 using PregnancySafe.Domain.Services;
@@ -15,21 +15,21 @@ namespace PregnancySafe.Controllers
     public class MedicalAppointmentController : Controller
     {
         private readonly IMedicalAppointmentService _medicalAppointmentService;
-        //private readonly IMapper _mapper;
-        //public MedicalAppointmentController(IMedicalAppointmentService medicalAppointmentService, IMapper mapper)
-        //{
-        //    _medicalAppointmentService = medicalAppointmentService;
-        //    _mapper = mapper;
-        //}
+        private readonly IMapper _mapper;
+        public MedicalAppointmentController(IMedicalAppointmentService medicalAppointmentService, IMapper mapper)
+        {
+            _medicalAppointmentService = medicalAppointmentService;
+            _mapper = mapper;
+        }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<MedicalAppointmentResource>> GetAllAsync()
-        //{
-        //    var medicalAppointment = await _medicalAppointmentService.ListAsync();
-        //    var resources = _mapper
-        //        .Map<IEnumerable<MedicalAppointment>, IEnumerable<MedicalAppointmentResource>>(medicalAppointment);
-        //    return resources;
-        //}
+        [HttpGet]
+        public async Task<IEnumerable<MedicalAppointmentResource>> GetAllAsync()
+        {
+            var medicalAppointment = await _medicalAppointmentService.ListAsync();
+            var resources = _mapper
+                .Map<IEnumerable<MedicalAppointment>, IEnumerable<MedicalAppointmentResource>>(medicalAppointment);
+            return resources;
+        }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveMedicalAppointmentResource resource)
