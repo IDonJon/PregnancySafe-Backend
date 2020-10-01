@@ -34,8 +34,9 @@ namespace PregnancySafe
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-      options.UseMySQL(Configuration.GetConnectionString
-      ("server=dbltm.mysql.database.azure.com; port=3306;database=dbltm; uid=Misael@dbltm; password=#Lutimi1234")));
+            {
+                options.UseMySQL("server=localhost; database=pregnacysafedb; user=root; password=992424558");
+            });
 
             services.AddMvc();
 
@@ -49,39 +50,19 @@ namespace PregnancySafe
                 });
             });
             services.AddControllers();
-
-            /*services.AddDbContext<AppDbContext>(options =>
+            
+            services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySQL("server=localhost;database=pregnancysafeweb;user=root;password=password");
-            });*/
+                options.UseMySQL("server=localhost; database=pregnacysafedb; user=root; password=992424558");
+            });
 
             //Advice
-            //services.AddScoped<IAdviceRepository, AdviceRepository>();
-            //services.AddScoped<IAdviceService, AdviceService>();
-            ////Chat
-            //services.AddScoped<IChatRepository, ChatRepository>();
-            //services.AddScoped<IChatService, ChatService>();
-            ////MedicalAppointment
-            //services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
-            //services.AddScoped<IMedicalAppointmentService, MedicalAppointmentService>();
-            ////MedicalExam
-            //services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
-            //services.AddScoped<IMedicalExamService, MedicalExamService>();
-            ////Message
-            //services.AddScoped<IMessageRepository, MessageRepository>();
-            //services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IAdviceRepository, AdviceRepository>();
+            services.AddScoped<IAdviceService, AdviceService>();
+           
             //Mother
             services.AddScoped<IMotherRepository, MotherRepository>();
             services.AddScoped<IMotherService, MotherService>();
-            //Obstetrician
-            //services.AddScoped<IObstetricianRepository, ObstetricianRepository>();
-            //services.AddScoped<IObstetricianService, ObstetricianService>();
-            ////PregnancyStage
-            //services.AddScoped<IPregnancyStageRepository, PregnancyStageRepository>();
-            //services.AddScoped<IPregnancyStageService, PregnancyStageService>();
-            ////Video
-            //services.AddScoped<IVideoRepository, VideoRepository>();
-            //services.AddScoped<IVideoService, VideoService>();
 
             services.AddAutoMapper(typeof(Startup));
         }
@@ -107,10 +88,7 @@ namespace PregnancySafe
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
