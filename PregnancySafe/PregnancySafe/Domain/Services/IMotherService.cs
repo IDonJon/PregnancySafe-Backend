@@ -1,5 +1,5 @@
 ﻿using PregnancySafe.Domain.Models;
-//using PregnancySafe.Domain.Services.Communication;
+using PregnancySafe.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace PregnancySafe.Domain.Services
     public interface IMotherService
     {
         Task<IEnumerable<Mother>> ListAsync();
-        //Task<MotherResponse> SaveAsync(Mother mother);
-        //Task<MotherResponse> UpdateAsync(int id, Mother mother);
-        //Task<MotherResponse> DeleteAsync(int id);
+        Task<MotherResponse> SaveAsync(Mother mother);
+        Task<MotherResponse> UpdateAsync(int id, Mother mother);
+        Task<MotherResponse> DeleteAsync(int id);
     }
 }
 
