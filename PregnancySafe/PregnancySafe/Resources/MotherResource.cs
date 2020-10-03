@@ -13,6 +13,6 @@ namespace PregnancySafe.Resources
         public string Email { get; set; }
         public int Age { get; set; }
 
-        //public PregnancyStageResource PregnancyStage { get; set; }
+        public PregnancyStageResource PregnancyStage { get; set; }
     }
 }

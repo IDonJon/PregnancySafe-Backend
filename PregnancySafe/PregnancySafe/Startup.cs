@@ -33,9 +33,9 @@ namespace PregnancySafe
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            /*services.AddDbContext<AppDbContext>(options =>
       options.UseMySQL(Configuration.GetConnectionString
-      ("server=dbltm.mysql.database.azure.com; port=3306;database=dbltm; uid=Misael@dbltm; password=#Lutimi1234")));
+      ("server=dbltm.mysql.database.azure.com; port=3306;database=dbltm; uid=Misael@dbltm; password=#Lutimi1234")));*/
 
             services.AddMvc();
 
@@ -50,38 +50,38 @@ namespace PregnancySafe
             });
             services.AddControllers();
 
-            /*services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySQL("server=localhost;database=pregnancysafeweb;user=root;password=password");
-            });*/
+                options.UseMySQL("server=localhost;user id=root;database=pregnancysafe_web;password=root");
+            });
 
             //Advice
-            //services.AddScoped<IAdviceRepository, AdviceRepository>();
-            //services.AddScoped<IAdviceService, AdviceService>();
+            services.AddScoped<IAdviceRepository, AdviceRepository>();
+            services.AddScoped<IAdviceService, AdviceService>();
             ////Chat
-            //services.AddScoped<IChatRepository, ChatRepository>();
-            //services.AddScoped<IChatService, ChatService>();
-            ////MedicalAppointment
-            //services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
-            //services.AddScoped<IMedicalAppointmentService, MedicalAppointmentService>();
-            ////MedicalExam
-            //services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
-            //services.AddScoped<IMedicalExamService, MedicalExamService>();
-            ////Message
-            //services.AddScoped<IMessageRepository, MessageRepository>();
-            //services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<IChatService, ChatService>();
+            //MedicalAppointment
+            services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
+            services.AddScoped<IMedicalAppointmentService, MedicalAppointmentService>();
+            //MedicalExam
+            services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
+            services.AddScoped<IMedicalExamService, MedicalExamService>();
+            //Message
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IMessageService, MessageService>();
             //Mother
             services.AddScoped<IMotherRepository, MotherRepository>();
             services.AddScoped<IMotherService, MotherService>();
             //Obstetrician
-            //services.AddScoped<IObstetricianRepository, ObstetricianRepository>();
-            //services.AddScoped<IObstetricianService, ObstetricianService>();
+            services.AddScoped<IObstetricianRepository, ObstetricianRepository>();
+            services.AddScoped<IObstetricianService, ObstetricianService>();
             ////PregnancyStage
-            //services.AddScoped<IPregnancyStageRepository, PregnancyStageRepository>();
-            //services.AddScoped<IPregnancyStageService, PregnancyStageService>();
+            services.AddScoped<IPregnancyStageRepository, PregnancyStageRepository>();
+            services.AddScoped<IPregnancyStageService, PregnancyStageService>();
             ////Video
-            //services.AddScoped<IVideoRepository, VideoRepository>();
-            //services.AddScoped<IVideoService, VideoService>();
+            services.AddScoped<IVideoRepository, VideoRepository>();
+            services.AddScoped<IVideoService, VideoService>();
 
             services.AddAutoMapper(typeof(Startup));
         }

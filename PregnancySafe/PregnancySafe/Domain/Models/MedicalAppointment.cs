@@ -8,7 +8,7 @@ namespace PregnancySafe.Domain.Models
     public class MedicalAppointment
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime AppointmentDate { get; set; }
         public int MotherId { get; set; }
         public Mother Mother { get; set; }
         public int ObstetricianId { get; set; }

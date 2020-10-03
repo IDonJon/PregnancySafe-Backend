@@ -43,7 +43,7 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<MedicalAppointment>().ToTable("Medical_Appointment");
             builder.Entity<MedicalAppointment>().HasKey(p => p.Id);
             builder.Entity<MedicalAppointment>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<MedicalAppointment>().Property(p => p.Date).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<MedicalAppointment>().Property(p => p.AppointmentDate).IsRequired().ValueGeneratedOnAdd();
 
             ////MedicalExam
             builder.Entity<MedicalExam>().ToTable("Medical_Exam");
@@ -89,7 +89,7 @@ namespace PregnancySafe.Persistence.Context
                 .WithOne(p => p.Mother).HasForeignKey(p => p.MotherId);
 
             //Obstetrician
-            builder.Entity<Obstetrician>().ToTable("Obstetrcian");
+            builder.Entity<Obstetrician>().ToTable("Obstetrician");
             builder.Entity<Obstetrician>().HasKey(p => p.Id);
             builder.Entity<Obstetrician>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Obstetrician>().Property(p => p.FirstName).IsRequired().ValueGeneratedOnAdd();
@@ -117,7 +117,7 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<PregnancyStage>().ToTable("Pregnancy_Stage");
             builder.Entity<PregnancyStage>().HasKey(p => p.Id);
             builder.Entity<PregnancyStage>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<PregnancyStage>().Property(p => p.Range).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<PregnancyStage>().Property(p => p.Extension).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<PregnancyStage>().Property(p => p.Description).IsRequired().HasMaxLength(250);
             builder.Entity<PregnancyStage>().HasMany(p => p.Mothers)
                 .WithOne(p => p.PregnancyStage).HasForeignKey(p => p.PregnancyStageId);

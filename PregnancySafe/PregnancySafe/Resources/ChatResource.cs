@@ -7,5 +7,8 @@ namespace PregnancySafe.Resources
 {
     public class ChatResource
     {
+        public int Id { get; set; }
+        public MotherResource Mother { get; set; }
+        public ObstetricianResource Obstetrician { get; set; }
     }
 }

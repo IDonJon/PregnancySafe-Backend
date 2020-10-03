@@ -8,7 +8,7 @@ namespace PregnancySafe.Resources
     public class PregnancyStageResource
     {
         public int Id { get; set; }
-        public string Range { get; set; }
+        public string Extension { get; set; }
         public string Description { get; set; }
     }
 }
