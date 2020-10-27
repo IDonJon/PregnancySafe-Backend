@@ -5,12 +5,6 @@ namespace PregnancySafe.Test
 {
     public class ObstetricianServiceTest
     {
-        public sealed class CalculatorStepDefinitions
-        {
-
-            // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
-            private readonly ScenarioContext _scenarioContext;
 
             public CalculatorStepDefinitions(ScenarioContext scenarioContext)
             {

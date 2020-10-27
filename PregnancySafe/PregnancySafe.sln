@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PregnancySafe", "PregnancySafe\PregnancySafe.csproj", "{E9419D95-9DA8-4592-AAD7-540B649D3C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PregnancySafe.Test", "PregnancySafe.Test\PregnancySafe.Test.csproj", "{0BF10189-6FA9-436D-9B4E-C705B5356C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PregnancySafe.Test", "PregnancySafe.Test\PregnancySafe.Test.csproj", "{0BF10189-6FA9-436D-9B4E-C705B5356C16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
