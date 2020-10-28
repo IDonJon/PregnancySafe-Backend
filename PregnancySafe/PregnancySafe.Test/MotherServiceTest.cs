@@ -6,33 +6,28 @@ namespace PregnancySafe.Test
     public class MotherServiceTest
     {
 
-            [Given("the first number is (.*)")]
-            public void GivenTheFirstNumberIs(int number)
+            [Given("the user is in the landing page(.*)")]
+            public void UserIsInTheLandingPage(int number)
             {
-                //TODO: implement arrange (precondition) logic
-                // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-                // To use the multiline text or the table argument of the scenario,
-                // additional string/Table parameters can be defined on the step definition
-                // method. 
-
-               
+         
+                ScenarioContext.Current.Pending();
             }
 
-            [When("the two numbers are added")]
-            public void WhenTheTwoNumbersAreAdded()
+            [When("clicks register button and fill the form")]
+            public void ClicksRegisterButtonAndFillTheForm()
             {
-                //TODO: implement act (action) logic
+          
 
-               
+                ScenarioContext.Current.Pending();
             }
 
             [Then("the result should be (.*)")]
             public void ThenTheResultShouldBe(int result)
             {
-                //TODO: implement assert (verification) logic
 
-               
+                ScenarioContext.Current.Pending();
+
             }
-        }
+        
     }
 }
