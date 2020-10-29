@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PregnancySafe.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/advices")]
     public class AdviceController : Controller
     {
         private readonly IAdviceService _adviceService;
@@ -21,11 +21,21 @@ namespace PregnancySafe.Controllers
             _adviceService = adviceService;
             _mapper = mapper;
         }
-
+        
+       
         [HttpGet]
-        public async Task<IEnumerable<AdviceResource>> GetAllAsync()
+        public async Task<IEnumerable<AdviceResource>> GetAllAdvicesAsync()
         {
             var advices = await _adviceService.ListAsync();
+            var resources = _mapper
+                .Map<IEnumerable<Advice>, IEnumerable<AdviceResource>>(advices);
+            return resources;
+        }
+
+        [HttpGet("{id}")]
+        public IEnumerable<AdviceResource> GetAllAdvicesByObstetricianId(int obstetricianId)
+        {
+            var advices = _adviceService.ListByObstetricianId(obstetricianId);
             var resources = _mapper
                 .Map<IEnumerable<Advice>, IEnumerable<AdviceResource>>(advices);
             return resources;
@@ -71,5 +81,6 @@ namespace PregnancySafe.Controllers
             var adviceResource = _mapper.Map<Advice, AdviceResource>(result.Advice);
             return Ok(adviceResource);
         }
+
     }
 }

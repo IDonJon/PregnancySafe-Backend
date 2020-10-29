@@ -12,6 +12,6 @@ namespace PregnancySafe.Domain.Models
         public int MotherId { get; set; }
         public Mother Mother { get; set; }
         public int ObstetricianId { get; set; }
-        public Obstetrician Obstetrician { get; set; }
+        public virtual Obstetrician Obstetrician { get; set; }
     }
 }

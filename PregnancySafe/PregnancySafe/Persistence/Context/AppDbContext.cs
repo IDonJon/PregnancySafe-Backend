@@ -31,6 +31,8 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Advice>().Property(p => p.Title).IsRequired().HasMaxLength(50);
             builder.Entity<Advice>().Property(p => p.Text).IsRequired().HasMaxLength(250);
             builder.Entity<Advice>().Property(p => p.PostDate).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Advice>().HasOne(p => p.Obstetrician).WithMany(w => w.Advices)
+                .HasForeignKey(q=>q.ObstetricianId);
 
             ////Chat
             builder.Entity<Chat>().ToTable("Chat");
@@ -97,8 +99,8 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Obstetrician>().Property(p => p.Email).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Obstetrician>().Property(p => p.Age).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Obstetrician>().Property(p => p.Degree).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Obstetrician>().HasMany(p => p.Advices)
-                .WithOne(p => p.Obstetrician).HasForeignKey(p => p.ObstetricianId);
+            //builder.Entity<Obstetrician>().HasMany(p => p.Advices)
+              //  .WithOne(p => p.Obstetrician).HasForeignKey(p => p.ObstetricianId);
 
             builder.Entity<Obstetrician>().HasMany(p => p.Chats)
                 .WithOne(p => p.Obstetrician).HasForeignKey(p => p.ObstetricianId);
