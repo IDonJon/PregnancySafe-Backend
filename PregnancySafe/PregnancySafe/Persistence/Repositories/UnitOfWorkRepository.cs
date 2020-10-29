@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PregnancySage.Persistance.Repositories
+namespace PregnancySafe.Persistance.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

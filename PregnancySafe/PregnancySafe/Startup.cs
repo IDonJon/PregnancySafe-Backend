@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PregnancySafe.Domain.Repositories;
 using PregnancySafe.Domain.Services;
+using PregnancySafe.Persistance.Repositories;
 using PregnancySafe.Persistence.Context;
 using PregnancySafe.Persistence.Repositories;
 using PregnancySafe.Services;
@@ -49,6 +50,8 @@ namespace PregnancySafe
                 });
             });
             services.AddControllers();
+
+            //services.AddHttpClient();
 
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
@@ -88,6 +91,8 @@ namespace PregnancySafe
             ////Video
             services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddScoped<IVideoService, VideoService>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));
         }
