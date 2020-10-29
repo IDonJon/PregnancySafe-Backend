@@ -12,9 +12,11 @@ namespace PregnancySafe.Services
     public class MotherService : IMotherService
     {
         private readonly IMotherRepository _motherRepository;
-        public MotherService(IMotherRepository motherRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public MotherService(IMotherRepository motherRepository, IUnitOfWork unitOfWork)
         {
             _motherRepository = motherRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<MotherResponse> DeleteAsync(int id)
@@ -33,6 +35,15 @@ namespace PregnancySafe.Services
             {
                 return new MotherResponse($"An error ocurred while deleting the Mother: {exception.Message}");
             }
+        }
+
+        public async Task<MotherResponse> GetByIdAsync(int id)
+        {
+            var existingMother = await _motherRepository.FindByIdAsync(id);
+
+            if (existingMother == null)
+                return new MotherResponse("Mother not found");
+            return new MotherResponse(existingMother);
         }
 
         public async Task<IEnumerable<Mother>> ListAsync()

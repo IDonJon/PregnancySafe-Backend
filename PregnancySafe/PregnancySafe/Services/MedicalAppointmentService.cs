@@ -12,9 +12,11 @@ namespace PregnancySafe.Services
     public class MedicalAppointmentService : IMedicalAppointmentService
     {
         private readonly IMedicalAppointmentRepository _medicalAppointmentRepository;
-        public MedicalAppointmentService(IMedicalAppointmentRepository medicalAppointmentRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public MedicalAppointmentService(IMedicalAppointmentRepository medicalAppointmentRepository, IUnitOfWork unitOfWork)
         {
             _medicalAppointmentRepository = medicalAppointmentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<MedicalAppointmentResponse> DeleteAsync(int id)
@@ -72,6 +74,14 @@ namespace PregnancySafe.Services
             {
                 return new MedicalAppointmentResponse($"An error ocurred while updating Medical Appointment: {exception.Message}");
             }
+        }
+        public async Task<MedicalAppointmentResponse> GetByIdAsync(int id)
+        {
+            var existingMedicalAppointment = await _medicalAppointmentRepository.FindByIdAsync(id);
+
+            if (existingMedicalAppointment == null)
+                return new MedicalAppointmentResponse("Medical Appointment not found");
+            return new MedicalAppointmentResponse(existingMedicalAppointment);
         }
     }
 }

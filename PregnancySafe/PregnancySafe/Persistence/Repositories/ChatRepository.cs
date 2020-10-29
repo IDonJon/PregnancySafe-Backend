@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PregnancySafe.Domain.Models;
 using PregnancySafe.Domain.Repositories;
+using PregnancySafe.Domain.Services.Communication;
 using PregnancySafe.Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -32,5 +33,6 @@ namespace PregnancySafe.Persistence.Repositories
         {
             _context.Chats.Remove(chat);
         }
+
     }
 }

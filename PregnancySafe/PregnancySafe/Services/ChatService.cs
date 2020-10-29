@@ -5,6 +5,7 @@ using PregnancySafe.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PregnancySafe.Services
@@ -12,9 +13,11 @@ namespace PregnancySafe.Services
     public class ChatService : IChatService
     {
         private readonly IChatRepository _chatRepository;
-        public ChatService(IChatRepository chatRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ChatService(IChatRepository chatRepository, IUnitOfWork unitOfWork)
         {
             _chatRepository = chatRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IEnumerable<Chat>> ListAsync()
         {
@@ -65,6 +68,14 @@ namespace PregnancySafe.Services
             {
                 return new ChatResponse($"An error ocurred while updating the Chat: {exception.Message}");
             }
+        }
+        public async Task<ChatResponse> GetByIdAsync(int id)
+        {
+            var existingChat = await _chatRepository.FindByIdAsync(id);
+
+            if (existingChat == null)
+                return new ChatResponse("Chat not found");
+            return new ChatResponse(existingChat);
         }
     }
 }

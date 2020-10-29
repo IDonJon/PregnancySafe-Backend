@@ -12,9 +12,11 @@ namespace PregnancySafe.Services
     public class ObstetricianService : IObstetricianService
     {
         private readonly IObstetricianRepository _obstetricianRepository;
-        public ObstetricianService(IObstetricianRepository obstetricianRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ObstetricianService(IObstetricianRepository obstetricianRepository, IUnitOfWork unitOfWork)
         {
             _obstetricianRepository = obstetricianRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ObstetricianResponse> DeleteAsync(int id)
@@ -38,6 +40,15 @@ namespace PregnancySafe.Services
         public async Task<IEnumerable<Obstetrician>> ListAsync()
         {
             return await _obstetricianRepository.ListAsync();
+        }
+
+        public async Task<ObstetricianResponse> GetByIdAsync(int id)
+        {
+            var existingObstetrician = await _obstetricianRepository.FindByIdAsync(id);
+
+            if (existingObstetrician == null)
+                return new ObstetricianResponse("Obstetrician not found");
+            return new ObstetricianResponse(existingObstetrician);
         }
 
         public async Task<ObstetricianResponse> SaveAsync(Obstetrician obstetrician)

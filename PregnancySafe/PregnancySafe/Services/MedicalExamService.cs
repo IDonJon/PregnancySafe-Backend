@@ -12,9 +12,11 @@ namespace PregnancySafe.Services
     public class MedicalExamService : IMedicalExamService
     {
         private readonly IMedicalExamRepository _medicalExamRepository;
-        public MedicalExamService(IMedicalExamRepository medicalExamRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public MedicalExamService(IMedicalExamRepository medicalExamRepository, IUnitOfWork unitOfWork)
         {
             _medicalExamRepository = medicalExamRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<MedicalExamResponse> DeleteAsync(int id)
@@ -34,6 +36,15 @@ namespace PregnancySafe.Services
             {
                 return new MedicalExamResponse($"An error ocurred while deleting the Medical Exam: {exception.Message}");
             }
+        }
+
+        public async Task<MedicalExamResponse> GetByIdAsync(int id)
+        {
+            var existingMedicalExam = await _medicalExamRepository.FindByIdAsync(id);
+
+            if (existingMedicalExam == null)
+                return new MedicalExamResponse("Medical Exam not found");
+            return new MedicalExamResponse(existingMedicalExam);
         }
 
         public async Task<IEnumerable<MedicalExam>> ListAsync()

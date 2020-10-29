@@ -1,4 +1,5 @@
 ﻿using PregnancySafe.Domain.Models;
+using PregnancySafe.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
