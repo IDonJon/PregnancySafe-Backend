@@ -13,5 +13,6 @@ namespace PregnancySafe.Resources
         public string Email { get; set; }
         public int Age { get; set; }
         public string Degree { get; set; }
+        public virtual IList<AdviceResource> Advices { get; set; } = new List<AdviceResource>();
     }
 }

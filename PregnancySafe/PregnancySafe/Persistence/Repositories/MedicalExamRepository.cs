@@ -14,7 +14,9 @@ namespace PregnancySafe.Persistence.Repositories
         public MedicalExamRepository(AppDbContext context) : base(context) { }
         public async Task<IEnumerable<MedicalExam>> ListAsync()
         {
-            return await _context.MedicalExams.ToListAsync();
+            return await _context.MedicalExams.Include(p=> p.Obstetrician)
+                .Include(q=> q.Mother)
+                .ToListAsync();
         }
         public async Task AddASync(MedicalExam medicalExam)
         {

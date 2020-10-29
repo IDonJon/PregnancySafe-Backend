@@ -13,8 +13,8 @@ namespace PregnancySafe.Domain.Models
         public string Result { get; set; }
         public DateTime PrescriptionDate { get; set; }
         public int MotherId { get; set; }
-        public Mother Mother { get; set; }
+        public virtual Mother Mother { get; set; }
         public int ObstetricianId { get; set; }
-        public Obstetrician Obstetrician { get; set; }
+        public virtual Obstetrician Obstetrician { get; set; }
     }
 }

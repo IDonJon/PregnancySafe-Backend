@@ -9,6 +9,7 @@ namespace PregnancySafe.Domain.Repositories
     public interface IAdviceRepository
     {
         Task<IEnumerable<Advice>> ListAsync();
+        IEnumerable<Advice> ListByObstetricianId(int obstetricianId);
         Task<Advice> FindByIdAsync(int id);
         Task AddASync(Advice advice);
         void Update(Advice advice);

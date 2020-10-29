@@ -40,6 +40,11 @@ namespace PregnancySafe.Services
             return await _adviceRepository.ListAsync();
         }
 
+        public  IEnumerable<Advice> ListByObstetricianId(int obstetricianId)
+        {
+            return  _adviceRepository.ListByObstetricianId(obstetricianId);
+        }
+
         public async Task<AdviceResponse> SaveAsync(Advice advice)
         {
             try
@@ -70,5 +75,7 @@ namespace PregnancySafe.Services
                 return new AdviceResponse($"An error ocurred while updating the Advice: {exception.Message}");
             }
         }
+
+
     }
 }

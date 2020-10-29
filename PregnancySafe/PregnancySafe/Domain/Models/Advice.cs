@@ -12,7 +12,7 @@ namespace PregnancySafe.Domain.Models
         public string Text { get; set; }
         public DateTime PostDate { get; set; }
         public int ObstetricianId { get; set; }
-        public Obstetrician Obstetrician { get; set; }
+        public virtual Obstetrician Obstetrician { get; set; }
     }
 }
 

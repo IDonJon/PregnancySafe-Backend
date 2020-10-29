@@ -50,6 +50,12 @@ namespace PregnancySafe
             });
             services.AddControllers();
 
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling 
+            = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL("server=localhost;user id=root;database=pregnancysafe_web;password=root");

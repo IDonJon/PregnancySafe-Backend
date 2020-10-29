@@ -15,7 +15,9 @@ namespace PregnancySafe.Persistence.Repositories
         public ChatRepository(AppDbContext context) : base(context) { }
         public async Task<IEnumerable<Chat>> ListAsync()
         {
-            return await _context.Chats.ToListAsync();
+            return await _context.Chats.
+                Include(p=>p.Obstetrician).Include(q=> q.Mother)
+                .ToListAsync();
         }
         public async Task AddAsync(Chat chat)
         {

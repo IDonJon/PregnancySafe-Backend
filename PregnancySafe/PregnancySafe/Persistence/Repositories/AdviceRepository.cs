@@ -23,8 +23,18 @@ namespace PregnancySafe.Persistence.Repositories
         }
         public async Task<IEnumerable<Advice>> ListAsync()
         {
-            return await _context.Advices.ToListAsync();
+            return await _context.Advices
+                .Include(p => p.Obstetrician).ToListAsync();
         }
+
+        public  IEnumerable<Advice> ListByObstetricianId(int obstetricianId)
+        {
+            return _context.Advices
+                .Where(p => p.ObstetricianId == obstetricianId)
+                .Include(p => p.Obstetrician)
+                .ToList();
+        }
+
         public void Remove(Advice advice)
         {
             _context.Advices.Remove(advice);
