@@ -37,7 +37,7 @@ namespace PregnancySafe
             /*services.AddDbContext<AppDbContext>(options =>
       options.UseMySQL(Configuration.GetConnectionString
       ("server=dbltm.mysql.database.azure.com; port=3306;database=dbltm; uid=Misael@dbltm; password=#Lutimi1234")));*/
-
+            services.AddMemoryCache();
             services.AddMvc();
 
             services.AddSwaggerGen(p =>
