@@ -26,7 +26,7 @@ namespace PregnancySafe.Persistence.Repositories
         public async Task<IEnumerable<MedicalAppointment>> ListAsync()
         {
             return await _context.MedicalAppointments.
-                Include(p=> p.Obstetrician).Include(q=> q.MotherId).ToListAsync();
+                Include(p=> p.Obstetrician).Include(q=> q.Mother).ToListAsync();
         }
 
         public void Remove(MedicalAppointment medicalAppointment)
