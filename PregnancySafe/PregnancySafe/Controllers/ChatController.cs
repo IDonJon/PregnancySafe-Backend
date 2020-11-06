@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PregnancySafe.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/chats")]
     public class ChatController : Controller
     {
         private readonly IChatService _chatService;

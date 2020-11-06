@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PregnancySafe.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/obstetricians")]
     public class ObstetricianController : Controller
     {
         private readonly IObstetricianService _obstetricianService;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PregnancySafe.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/messages")]
     public class MessageController : Controller
     {
         private readonly IMessageService _messageService;

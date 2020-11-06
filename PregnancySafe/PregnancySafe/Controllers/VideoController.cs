@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PregnancySafe.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/videos")]
     public class VideoController : Controller
     {
         private readonly IVideoService _videoService;
