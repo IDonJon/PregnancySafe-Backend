@@ -17,7 +17,7 @@ namespace PregnancySafe.Persistence.Repositories
         {
             await _context.Advices.AddAsync(advice);
         }
-        public async Task<Advice> FindByIdAsync(int id)
+        public async Task<Advice> FindById(int id)
         {
             return await _context.Advices.FindAsync(id);
         }

@@ -19,7 +19,7 @@ namespace PregnancySafe.Services
 
         public async Task<AdviceResponse> DeleteAsync(int id)
         {
-            var existingAdvice = await _adviceRepository.FindByIdAsync(id);
+            var existingAdvice = await _adviceRepository.FindById(id);
 
             if (existingAdvice == null)
                 return new AdviceResponse("Advice not found");
@@ -60,10 +60,13 @@ namespace PregnancySafe.Services
 
         public async Task<AdviceResponse> UpdateAsync(int id, Advice advice)
         {
-            var existingAdvice = await _adviceRepository.FindByIdAsync(id);
+            var existingAdvice = await _adviceRepository.FindById(id);
 
             if (existingAdvice == null)
                 return new AdviceResponse("Advice not found");
+            existingAdvice.Title = advice.Title;
+            existingAdvice.Text = advice.Text;
+            existingAdvice.PostDate = advice.PostDate;
 
             try
             {
