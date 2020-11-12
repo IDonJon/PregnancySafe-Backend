@@ -9,11 +9,11 @@ namespace PregnancySafe.Resources
     public class SaveVideoResource
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Url { get; set; }
 
         [Required]

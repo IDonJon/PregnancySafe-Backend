@@ -10,7 +10,7 @@ namespace PregnancySafe.Domain.Services
     public interface IVideoService
     {
         Task<IEnumerable<Video>> ListAsync();
-        Task<VideoResponse> SaveAsync(Video video);
+        Task<VideoResponse> SaveAsync(Video video, int obstetricianId);
         Task<VideoResponse> UpdateAsync(int id, Video video);
         Task<VideoResponse> DeleteAsync(int id);
     }

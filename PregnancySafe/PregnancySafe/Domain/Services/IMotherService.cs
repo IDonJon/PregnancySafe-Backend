@@ -10,7 +10,7 @@ namespace PregnancySafe.Domain.Services
     public interface IMotherService
     {
         Task<IEnumerable<Mother>> ListAsync();
-        Task<MotherResponse> SaveAsync(Mother mother);
+        Task<MotherResponse> SaveAsync(Mother mother, int pregnancyStageId);
         Task<MotherResponse> UpdateAsync(int id, Mother mother);
         Task<MotherResponse> DeleteAsync(int id);
     }

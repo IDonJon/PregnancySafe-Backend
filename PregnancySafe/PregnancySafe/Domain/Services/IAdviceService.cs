@@ -11,7 +11,7 @@ namespace PregnancySafe.Domain.Services
     {
         Task<IEnumerable<Advice>> ListAsync();
         IEnumerable<Advice> ListByObstetricianId(int obstetricianId);
-        Task<AdviceResponse> SaveAsync(Advice advice);
+        Task<AdviceResponse> SaveAsync(Advice advice, int obstetricianId);
         Task<AdviceResponse> UpdateAsync(int id, Advice advice);
         Task<AdviceResponse> DeleteAsync(int id);
     }

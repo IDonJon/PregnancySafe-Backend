@@ -45,14 +45,15 @@ namespace PregnancySafe.Controllers
             return Ok(chatResource);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveChatResource resource)
+        [HttpPost("{motherId}/{obstetricianId}")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveChatResource resource, int motherId,
+            int obstetricianId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var chat = _mapper.Map<SaveChatResource, Chat>(resource);
-            var result = await _chatService.SaveAsync(chat);
+            var result = await _chatService.SaveAsync(chat, motherId, obstetricianId);
 
             if (!result.Success)
                 return BadRequest(result.Chat);

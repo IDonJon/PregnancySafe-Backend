@@ -29,6 +29,7 @@ namespace PregnancySafe.Services
             try
             {
                 _obstetricianRepository.Remove(existingObstetrician);
+                await _unitOfWork.CompleteAsync();
                 return new ObstetricianResponse(existingObstetrician);
             }
             catch (Exception exception)
@@ -56,6 +57,7 @@ namespace PregnancySafe.Services
             try
             {
                 await _obstetricianRepository.AddASync(obstetrician);
+                await _unitOfWork.CompleteAsync();
                 return new ObstetricianResponse(obstetrician);
             }
             catch (Exception exception)
@@ -71,9 +73,16 @@ namespace PregnancySafe.Services
             if (existingObstetrician == null)
                 return new ObstetricianResponse("Obstetrician not found");
 
+            existingObstetrician.FirstName = obstetrician.FirstName;
+            existingObstetrician.LastName = obstetrician.LastName;
+            existingObstetrician.Email = obstetrician.Email;
+            existingObstetrician.Age = obstetrician.Age;
+            existingObstetrician.Degree = obstetrician.Degree;
+
             try
             {
                 _obstetricianRepository.Update(existingObstetrician);
+                await _unitOfWork.CompleteAsync();
                 return new ObstetricianResponse(existingObstetrician);
             }
             catch (Exception exception)
