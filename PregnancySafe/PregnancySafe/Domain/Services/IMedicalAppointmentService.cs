@@ -13,5 +13,6 @@ namespace PregnancySafe.Domain.Services
         Task<MedicalAppointmentResponse> SaveAsync(MedicalAppointment medicalAppointment);
         Task<MedicalAppointmentResponse> UpdateAsync(int id, MedicalAppointment medicalAppointment);
         Task<MedicalAppointmentResponse> DeleteAsync(int id);
+        Task<MedicalAppointmentResponse> GetByIdAsync(int id);
     }
 }
