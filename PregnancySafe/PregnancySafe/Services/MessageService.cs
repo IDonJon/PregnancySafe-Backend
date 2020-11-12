@@ -15,19 +15,32 @@ namespace PregnancySafe.Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
-        public MessageService(IMessageRepository messageRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IChatRepository _chatRepository;
+        public MessageService(IMessageRepository messageRepository, IUnitOfWork unitOfWork,
+            IChatRepository chatRepository)
         {
             _messageRepository = messageRepository;
+            _unitOfWork = unitOfWork;
+            _chatRepository = chatRepository;
         }
         public async Task<IEnumerable<Message>> ListAsync()
         {
             return await _messageRepository.ListAsync();
         }
-        public async Task<MessageResponse> SaveAsync(Message message)
+        public async Task<MessageResponse> SaveAsync(Message message, int chatId)
         {
+            var existingChat = await _chatRepository
+              .FindByIdAsync(chatId);
+            if (existingChat == null)
+                return new MessageResponse("Chat not found");
+
+            message.Chat = existingChat;
+
             try
             {
                 await _messageRepository.AddAsync(message);
+                await _unitOfWork.CompleteAsync();
                 return new MessageResponse(message);
             }
             catch (Exception exception)
@@ -44,6 +57,7 @@ namespace PregnancySafe.Services
             try
             {
                 _messageRepository.Remove(existingMessage);
+                await _unitOfWork.CompleteAsync();
                 return new MessageResponse(existingMessage);
             }
             catch (Exception exception)
@@ -60,6 +74,7 @@ namespace PregnancySafe.Services
             try
             {
                 _messageRepository.Update(existingMessage);
+                await _unitOfWork.CompleteAsync();
                 return new MessageResponse(existingMessage);
             }
             catch (Exception exception)

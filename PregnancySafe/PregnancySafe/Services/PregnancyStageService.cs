@@ -12,9 +12,12 @@ namespace PregnancySafe.Services
     public class PregnancyStageService : IPregnancyStageService
     {
         private readonly IPregnancyStageRepository _pregnancyStageRepository;
-        public PregnancyStageService(IPregnancyStageRepository pregnancyStageRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public PregnancyStageService(IPregnancyStageRepository pregnancyStageRepository,
+            IUnitOfWork unitOfWork)
         {
             _pregnancyStageRepository = pregnancyStageRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PregnancyStageResponse> DeleteAsync(int id)
@@ -27,6 +30,7 @@ namespace PregnancySafe.Services
             try
             {
                 _pregnancyStageRepository.Remove(existingPregnancyStage);
+                await _unitOfWork.CompleteAsync();
                 return new PregnancyStageResponse(existingPregnancyStage);
             }
             catch (Exception exception)
@@ -45,6 +49,7 @@ namespace PregnancySafe.Services
             try
             {
                 await _pregnancyStageRepository.AddASync(pregnancyStage);
+                await _unitOfWork.CompleteAsync();
                 return new PregnancyStageResponse(pregnancyStage);
             }
             catch (Exception exception)
@@ -63,6 +68,7 @@ namespace PregnancySafe.Services
             try
             {
                 _pregnancyStageRepository.Update(existingPregnancyStage);
+                await _unitOfWork.CompleteAsync();
                 return new PregnancyStageResponse(existingPregnancyStage);
             }
             catch (Exception exception)

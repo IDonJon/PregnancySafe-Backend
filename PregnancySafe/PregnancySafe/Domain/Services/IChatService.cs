@@ -10,7 +10,7 @@ namespace PregnancySafe.Domain.Services
     public interface IChatService
     {
         Task<IEnumerable<Chat>> ListAsync();
-        Task<ChatResponse> SaveAsync(Chat chat);
+        Task<ChatResponse> SaveAsync(Chat chat, int motherId, int obstetricianId);
         Task<ChatResponse> UpdateAsync(int id, Chat chat);
         Task<ChatResponse> DeleteAsync(int id);
     }

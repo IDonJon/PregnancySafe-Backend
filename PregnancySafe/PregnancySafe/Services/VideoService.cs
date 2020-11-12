@@ -12,9 +12,14 @@ namespace PregnancySafe.Services
     public class VideoService : IVideoService
     {
         private readonly IVideoRepository _videoRepository;
-        public VideoService(IVideoRepository videoRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IObstetricianRepository _obstetricianRepository;
+        public VideoService(IVideoRepository videoRepository, IUnitOfWork unitOfWork,
+            IObstetricianRepository obstetricianRepository)
         {
             _videoRepository = videoRepository;
+            _unitOfWork = unitOfWork;
+            _obstetricianRepository = obstetricianRepository;
         }
 
         public async Task<VideoResponse> DeleteAsync(int id)
@@ -27,7 +32,7 @@ namespace PregnancySafe.Services
             try
             {
                 _videoRepository.Remove(existingVideo);
-
+                await _unitOfWork.CompleteAsync();
                 return new VideoResponse(existingVideo);
             }
             catch (Exception exception)
@@ -41,12 +46,19 @@ namespace PregnancySafe.Services
             return await _videoRepository.ListAsync();
         }
 
-        public async Task<VideoResponse> SaveAsync(Video video)
+        public async Task<VideoResponse> SaveAsync(Video video, int obstetricianId)
         {
+            var existingObstetrician = await _obstetricianRepository
+               .FindByIdAsync(obstetricianId);
+            if (existingObstetrician == null)
+                return new VideoResponse("Obstetrician not found");
+
+            video.Obstetrician = existingObstetrician;
+
             try
             {
                 await _videoRepository.AddAsync(video);
-
+                await _unitOfWork.CompleteAsync();
                 return new VideoResponse(video);
             }
             catch (Exception exception)
@@ -65,6 +77,7 @@ namespace PregnancySafe.Services
             try
             {
                 _videoRepository.Update(existingVideo);
+                await _unitOfWork.CompleteAsync();
                 return new VideoResponse(existingVideo);
             }
             catch (Exception exception)

@@ -14,20 +14,43 @@ namespace PregnancySafe.Services
     {
         private readonly IChatRepository _chatRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public ChatService(IChatRepository chatRepository, IUnitOfWork unitOfWork)
+        private readonly IMotherRepository _motherRepository;
+        private readonly IObstetricianRepository _obstetricianRepository;
+        public ChatService(IChatRepository chatRepository, IUnitOfWork unitOfWork,
+            IMotherRepository motherRepository, IObstetricianRepository obstetricianRepository)
         {
             _chatRepository = chatRepository;
             _unitOfWork = unitOfWork;
+            _motherRepository = motherRepository;
+            _obstetricianRepository = obstetricianRepository;
         }
         public async Task<IEnumerable<Chat>> ListAsync()
         {
             return await _chatRepository.ListAsync();
         }
-        public async Task<ChatResponse> SaveAsync(Chat chat)
+        public async Task<ChatResponse> SaveAsync(Chat chat, int motherId,
+            int obstetricianId)
         {
+
+            var existingObstetrician = await _obstetricianRepository
+               .FindByIdAsync(obstetricianId);
+            if (existingObstetrician == null)
+                return new ChatResponse("Obstetrician not found");
+
+            chat.Obstetrician = existingObstetrician;
+
+            var existingMother = await _motherRepository
+                .FindByIdAsync(motherId);
+            if (existingMother == null)
+                return new ChatResponse("Mother not found");
+
+            chat.Mother = existingMother;
+
+
             try
             {
                 await _chatRepository.AddAsync(chat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(chat);
             }
             catch (Exception exception)
@@ -44,6 +67,7 @@ namespace PregnancySafe.Services
             try
             {
                 _chatRepository.Remove(existingChat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(existingChat);
             }
             catch (Exception exception)
@@ -62,6 +86,7 @@ namespace PregnancySafe.Services
             try
             {
                 _chatRepository.Update(existingChat);
+                await _unitOfWork.CompleteAsync();
                 return new ChatResponse(existingChat);
             }
             catch (Exception exception)

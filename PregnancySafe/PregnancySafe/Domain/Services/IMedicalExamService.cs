@@ -10,7 +10,7 @@ namespace PregnancySafe.Domain.Services
     public interface IMedicalExamService
     {
         Task<IEnumerable<MedicalExam>> ListAsync();
-        Task<MedicalExamResponse> SaveAsync(MedicalExam medicalExam);
+        Task<MedicalExamResponse> SaveAsync(MedicalExam medicalExam, int motherId, int obstetricianId);
         Task<MedicalExamResponse> UpdateAsync(int id, MedicalExam medicalExam);
         Task<MedicalExamResponse> DeleteAsync(int id);
     }
