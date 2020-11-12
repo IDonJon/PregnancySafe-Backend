@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/pregnancysafebackenddbserver/databases/PregnancySafe_db",
+      "type": "mssql.azure",
+      "connectionId": "pregnancysafestring",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
