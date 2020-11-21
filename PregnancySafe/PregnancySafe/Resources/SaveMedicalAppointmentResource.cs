@@ -9,6 +9,6 @@ namespace PregnancySafe.Resources
     public class SaveMedicalAppointmentResource
     {
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime AppointmentDate { get; set; }
     }
 }

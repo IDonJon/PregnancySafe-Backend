@@ -64,7 +64,8 @@ namespace PregnancySafe.Services
 
             if (existingPregnancyStage == null)
                 return new PregnancyStageResponse("Pregnancy Stage not found");
-
+            existingPregnancyStage.Extension = pregnancyStage.Extension;
+            existingPregnancyStage.Description = pregnancyStage.Description;
             try
             {
                 _pregnancyStageRepository.Update(existingPregnancyStage);

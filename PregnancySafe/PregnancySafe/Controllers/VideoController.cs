@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SaveVideoResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody]SaveVideoResource resource)
         {
             var video = _mapper.Map<SaveVideoResource, Video>(resource);
             var result = await _videoService.UpdateAsync(id, video);
