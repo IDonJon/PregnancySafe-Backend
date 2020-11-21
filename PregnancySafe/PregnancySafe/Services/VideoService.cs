@@ -74,6 +74,10 @@ namespace PregnancySafe.Services
             if (existingVideo == null)
                 return new VideoResponse("Video not found");
 
+            existingVideo.Url = video.Url;
+            existingVideo.Title = video.Title;
+            existingVideo.PostDate = video.PostDate;
+
             try
             {
                 _videoRepository.Update(existingVideo);
