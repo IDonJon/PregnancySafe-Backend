@@ -2,7 +2,7 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql",
-      "connectionId": "pregnancysafestring"
+      "connectionId": "webdestroyerconnectionstring"
     }
   }
 }
