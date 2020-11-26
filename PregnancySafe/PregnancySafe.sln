@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PregnancySafe", "PregnancyS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PregnancySafe.Test", "PregnancySafe.Test\PregnancySafe.Test.csproj", "{0BF10189-6FA9-436D-9B4E-C705B5356C16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PregnancySafeSpec.Test", "PregnancySafeSpec.Test\PregnancySafeSpec.Test.csproj", "{185C984B-6AF0-4C86-8125-307291936EFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0BF10189-6FA9-436D-9B4E-C705B5356C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BF10189-6FA9-436D-9B4E-C705B5356C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BF10189-6FA9-436D-9B4E-C705B5356C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185C984B-6AF0-4C86-8125-307291936EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185C984B-6AF0-4C86-8125-307291936EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185C984B-6AF0-4C86-8125-307291936EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185C984B-6AF0-4C86-8125-307291936EFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,7 @@ namespace PregnancySafe.Domain.Services
         Task<MotherResponse> SaveAsync(Mother mother, int pregnancyStageId);
         Task<MotherResponse> UpdateAsync(int id, Mother mother);
         Task<MotherResponse> DeleteAsync(int id);
+        Task<MotherResponse> GetByIdAsync(int id);
     }
 }
 

@@ -13,5 +13,6 @@ namespace PregnancySafe.Domain.Services
         Task<ObstetricianResponse> SaveAsync(Obstetrician obstetrician);
         Task<ObstetricianResponse> UpdateAsync(int id, Obstetrician obstetrician);
         Task<ObstetricianResponse> DeleteAsync(int id);
+        Task<ObstetricianResponse> GetByIdAsync(int id);
     }
 }

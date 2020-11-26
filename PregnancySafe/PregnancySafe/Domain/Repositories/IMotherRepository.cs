@@ -13,5 +13,6 @@ namespace PregnancySafe.Domain.Repositories
         Task AddASync(Mother mother);
         void Update(Mother mother);
         void Remove(Mother mother);
+        void GetByIdAsync(int motherId);
     }
 }
