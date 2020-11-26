@@ -90,6 +90,9 @@ namespace PregnancySafe
             ////Video
             services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddScoped<IVideoService, VideoService>();
+            ////User
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
