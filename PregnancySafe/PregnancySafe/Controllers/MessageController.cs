@@ -30,14 +30,14 @@ namespace PregnancySafe.Controllers
             return resources;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveMessageResource resource)
+        [HttpPost("{chatId}")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveMessageResource resource, int chatId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var message = _mapper.Map<SaveMessageResource, Message>(resource);
-            var result = await _messageService.SaveAsync(message);
+            var result = await _messageService.SaveAsync(message, chatId);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SaveMessageResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody]SaveMessageResource resource)
         {
             var message = _mapper.Map<SaveMessageResource, Message>(resource);
             var result = await _messageService.UpdateAsync(id, message);

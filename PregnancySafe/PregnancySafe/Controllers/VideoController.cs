@@ -31,13 +31,13 @@ namespace PregnancySafe.Controllers
             return resources;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveVideoResource resource)
+        [HttpPost("{obstetricianId}")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveVideoResource resource, int obstetricianId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
             var video = _mapper.Map<SaveVideoResource, Video>(resource);
-            var result = await _videoService.SaveAsync(video);
+            var result = await _videoService.SaveAsync(video, obstetricianId);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SaveVideoResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody]SaveVideoResource resource)
         {
             var video = _mapper.Map<SaveVideoResource, Video>(resource);
             var result = await _videoService.UpdateAsync(id, video);

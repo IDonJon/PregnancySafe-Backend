@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SavePregnancyStageResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody]SavePregnancyStageResource resource)
         {
             var pregnancyStage = _mapper.Map<SavePregnancyStageResource, PregnancyStage>(resource);
             var result = await _pregnancyStageService.UpdateAsync(id, pregnancyStage);

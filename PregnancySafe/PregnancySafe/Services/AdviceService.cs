@@ -12,9 +12,14 @@ namespace PregnancySafe.Services
     public class AdviceService : IAdviceService
     {
         private readonly IAdviceRepository _adviceRepository;
-        public AdviceService(IAdviceRepository adviceRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IObstetricianRepository _obstetricianRepository;
+        public AdviceService(IAdviceRepository adviceRepository, IUnitOfWork unitOfWork,
+            IObstetricianRepository obstetricianRepository)
         {
             _adviceRepository = adviceRepository;
+            _unitOfWork = unitOfWork;
+            _obstetricianRepository = obstetricianRepository;
         }
 
         public async Task<AdviceResponse> DeleteAsync(int id)
@@ -27,6 +32,7 @@ namespace PregnancySafe.Services
             try
             {
                 _adviceRepository.Remove(existingAdvice);
+                await _unitOfWork.CompleteAsync();
                 return new AdviceResponse(existingAdvice);
             }
             catch (Exception exception)
@@ -45,11 +51,19 @@ namespace PregnancySafe.Services
             return  _adviceRepository.ListByObstetricianId(obstetricianId);
         }
 
-        public async Task<AdviceResponse> SaveAsync(Advice advice)
+        public async Task<AdviceResponse> SaveAsync(Advice advice, int obstetricianId)
         {
+            var existingObstetrician = await _obstetricianRepository
+                .FindByIdAsync(obstetricianId);
+            if (existingObstetrician == null)
+                return new AdviceResponse("Obstetrician not found");
+
+            advice.Obstetrician = existingObstetrician;
+
             try
             {
                 await _adviceRepository.AddASync(advice);
+                await _unitOfWork.CompleteAsync();
                 return new AdviceResponse(advice);
             }
             catch (Exception exception)
@@ -71,6 +85,7 @@ namespace PregnancySafe.Services
             try
             {
                 _adviceRepository.Update(existingAdvice);
+                await _unitOfWork.CompleteAsync();
                 return new AdviceResponse(existingAdvice);
             }
             catch (Exception exception)

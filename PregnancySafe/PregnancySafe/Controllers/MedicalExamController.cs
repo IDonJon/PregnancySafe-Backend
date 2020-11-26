@@ -31,13 +31,14 @@ namespace PregnancySafe.Controllers
             return resources;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveMedicalExamResource resource)
+        [HttpPost("{motherId}/{obstetricianId}")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveMedicalExamResource resource,
+             int motherId, int obstetricianId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
             var medicalExam = _mapper.Map<SaveMedicalExamResource, MedicalExam>(resource);
-            var result = await _medicalExamService.SaveAsync(medicalExam);
+            var result = await _medicalExamService.SaveAsync(medicalExam, motherId, obstetricianId);
 
             if (!result.Success)
                 return BadRequest(result.Message);

@@ -31,13 +31,13 @@ namespace PregnancySafe.Controllers
             return resources;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveMotherResource resource)
+        [HttpPost("{pregnancyStageId}")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveMotherResource resource, int pregnancyStageId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
             var mother = _mapper.Map<SaveMotherResource, Mother>(resource);
-            var result = await _motherService.SaveAsync(mother);
+            var result = await _motherService.SaveAsync(mother, pregnancyStageId);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SaveMotherResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveMotherResource resource)
         {
             var mother = _mapper.Map<SaveMotherResource, Mother>(resource);
             var result = await _motherService.UpdateAsync(id, mother);

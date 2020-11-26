@@ -13,10 +13,13 @@ namespace PregnancySafe.Services
     {
         private readonly IMotherRepository _motherRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public MotherService(IMotherRepository motherRepository, IUnitOfWork unitOfWork)
+        private readonly IPregnancyStageRepository _pregnancyStageRepository;
+        public MotherService(IMotherRepository motherRepository, IUnitOfWork unitOfWork,
+            IPregnancyStageRepository pregnancyStageRepository)
         {
             _motherRepository = motherRepository;
             _unitOfWork = unitOfWork;
+            _pregnancyStageRepository = pregnancyStageRepository;
         }
 
         public async Task<MotherResponse> DeleteAsync(int id)
@@ -29,6 +32,7 @@ namespace PregnancySafe.Services
             try
             {
                 _motherRepository.Remove(existingMother);
+                await _unitOfWork.CompleteAsync();
                 return new MotherResponse(existingMother);
             }
             catch (Exception exception)
@@ -51,11 +55,19 @@ namespace PregnancySafe.Services
             return await _motherRepository.ListAsync();
         }
 
-        public async Task<MotherResponse> SaveAsync(Mother mother)
+        public async Task<MotherResponse> SaveAsync(Mother mother, int pregnancyStageId)
         {
+            var existingPregnancyStage = await _pregnancyStageRepository
+            .FindByIdAsync(pregnancyStageId);
+            if (existingPregnancyStage == null)
+                return new MotherResponse("Pregnancy Stage not found");
+
+            mother.PregnancyStage = existingPregnancyStage;
+
             try
             {
                 await _motherRepository.AddASync(mother);
+                await _unitOfWork.CompleteAsync();
                 return new MotherResponse(mother);
             }
             catch (Exception exception)
@@ -70,10 +82,15 @@ namespace PregnancySafe.Services
 
             if (existingMother == null)
                 return new MotherResponse("Mother not found");
+            existingMother.FirstName = mother.FirstName;
+            existingMother.LastName = mother.LastName;
+            existingMother.Email = mother.Email;
+            existingMother.Age = mother.Age;
 
             try
             {
                 _motherRepository.Update(existingMother);
+                await _unitOfWork.CompleteAsync();
                 return new MotherResponse(existingMother);
             }
             catch (Exception exception)

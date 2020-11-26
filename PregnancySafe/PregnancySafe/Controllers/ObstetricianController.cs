@@ -47,7 +47,7 @@ namespace PregnancySafe.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, SaveObstetricianResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody]SaveObstetricianResource resource)
         {
             var obstetrician = _mapper.Map<SaveObstetricianResource, Obstetrician>(resource);
             var result = await _obstetricianService.UpdateAsync(id, obstetrician);

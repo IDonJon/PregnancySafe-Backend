@@ -21,6 +21,7 @@ namespace PregnancySafe.Mapping
             CreateMap<Obstetrician, ObstetricianResource>();
             CreateMap<PregnancyStage, PregnancyStageResource>();
             CreateMap<Video, VideoResource>();
+            CreateMap<User, UserResource>();
         }
     }
 }

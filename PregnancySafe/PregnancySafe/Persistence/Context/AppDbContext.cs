@@ -19,6 +19,8 @@ namespace PregnancySafe.Persistence.Context
         public DbSet<PregnancyStage> PregnancyStages { get; set; }
         public DbSet<Video> Videos { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -69,7 +71,7 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Message>().ToTable("Message");
             builder.Entity<Message>().HasKey(p => p.Id);
             builder.Entity<Message>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Message>().Property(p => p.SenderId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Message>().Property(p => p.SenderId).IsRequired().ValueGeneratedNever();
             builder.Entity<Message>().Property(p => p.Text).IsRequired().HasMaxLength(250);
             builder.Entity<Message>().Property(p => p.Date).IsRequired().ValueGeneratedOnAdd();
 
@@ -80,7 +82,7 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Mother>().Property(p => p.FirstName).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Mother>().Property(p => p.LastName).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Mother>().Property(p => p.Email).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Mother>().Property(p => p.Age).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Mother>().Property(p => p.Age).IsRequired().ValueGeneratedNever();
             builder.Entity<Mother>().HasMany(p => p.Chats)
                 .WithOne(p => p.Mother).HasForeignKey(p => p.MotherId);
 
@@ -97,7 +99,7 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Obstetrician>().Property(p => p.FirstName).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Obstetrician>().Property(p => p.LastName).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Obstetrician>().Property(p => p.Email).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Obstetrician>().Property(p => p.Age).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Obstetrician>().Property(p => p.Age).IsRequired().ValueGeneratedNever();
             builder.Entity<Obstetrician>().Property(p => p.Degree).IsRequired().ValueGeneratedOnAdd();
             //builder.Entity<Obstetrician>().HasMany(p => p.Advices)
               //  .WithOne(p => p.Obstetrician).HasForeignKey(p => p.ObstetricianId);
@@ -132,6 +134,11 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Video>().Property(p => p.PostDate).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Video>().Property(p => p.Title).IsRequired().HasMaxLength(50);
 
+            ////User
+            builder.Entity<User>().ToTable("UserAuth");
+            builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(50);
+            builder.Entity<User>().Property(p => p.Password).IsRequired().HasMaxLength(50);
+            builder.Entity<User>().Property(p => p.Email).IsRequired().HasMaxLength(50);
         }
     }
 }

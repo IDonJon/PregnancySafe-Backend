@@ -9,7 +9,7 @@ namespace PregnancySafe.Resources
     public class SaveMedicalExamResource
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string ExamType { get; set; }
 
         [Required]

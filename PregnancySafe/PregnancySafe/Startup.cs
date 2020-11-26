@@ -34,9 +34,8 @@ namespace PregnancySafe
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.AddDbContext<AppDbContext>(options =>
-      options.UseMySQL(Configuration.GetConnectionString
-      ("server=dbltm.mysql.database.azure.com; port=3306;database=dbltm; uid=Misael@dbltm; password=#Lutimi1234")));*/
+            services.AddDbContext<AppDbContext>(options =>
+      options.UseSqlServer("Server=tcp:pregnancysafedatabserver.database.windows.net,1433;Database=PregnancySafe_db;User ID=webdestroyer@pregnancysafedatabserver;Password=destroyer$21;"));
             services.AddMemoryCache();
             services.AddMvc();
 
@@ -59,10 +58,10 @@ namespace PregnancySafe
             = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            services.AddDbContext<AppDbContext>(options =>
+            /*services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL("server=localhost;user id=root;database=pregnancysafe_web;password=root");
-            });
+            });*/
 
             //Advice
             services.AddScoped<IAdviceRepository, AdviceRepository>();
@@ -91,6 +90,9 @@ namespace PregnancySafe
             ////Video
             services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddScoped<IVideoService, VideoService>();
+            ////User
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
