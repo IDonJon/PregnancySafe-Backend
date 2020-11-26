@@ -19,6 +19,8 @@ namespace PregnancySafe.Persistence.Context
         public DbSet<PregnancyStage> PregnancyStages { get; set; }
         public DbSet<Video> Videos { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -132,6 +134,11 @@ namespace PregnancySafe.Persistence.Context
             builder.Entity<Video>().Property(p => p.PostDate).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Video>().Property(p => p.Title).IsRequired().HasMaxLength(50);
 
+            ////User
+            builder.Entity<User>().ToTable("UserAuth");
+            builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(50);
+            builder.Entity<User>().Property(p => p.Password).IsRequired().HasMaxLength(50);
+            builder.Entity<User>().Property(p => p.Email).IsRequired().HasMaxLength(50);
         }
     }
 }
