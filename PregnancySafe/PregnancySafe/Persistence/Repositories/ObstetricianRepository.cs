@@ -23,6 +23,11 @@ namespace PregnancySafe.Persistence.Repositories
             return await _context.Obstetricians.FindAsync(id);
         }
 
+        public void GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Obstetrician>> ListAsync()
         {
             return await _context.Obstetricians.

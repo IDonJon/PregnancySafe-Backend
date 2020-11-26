@@ -35,8 +35,8 @@ namespace PregnancySafeSpec.Test.Steps
             _medicalappointmentService = new MedicalAppointmentService(_medicalappointmentRepositoryMock.Object, _unitOfWorkMock.Object);
             _motherService = new MotherService(_motherRepositoryMock.Object, _unitOfWorkMock.Object);
 
-            _motherRepositoryMock.Setup(a => a.GetByIdAsync(motherId)).ReturnsAsync(mother);
-            _medicalappointmentRepositoryMock.Setup(r => r.FindByIdAsync(appointmentId).ReturnsAsync(appointment));
+            //_motherRepositoryMock.Setup(a => a.GetByIdAsync(motherId)).ReturnsAsync(mother);
+            //_medicalappointmentRepositoryMock.Setup(r => r.FindByIdAsync(appointmentId).ReturnsAsync(appointment));
         }
 
         private void ReturnsAsync(Mother mother)
